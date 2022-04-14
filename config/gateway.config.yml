@@ -1,0 +1,31 @@
+http:
+  port: 8080
+https:
+  port: 9443
+  hostname: localhost
+apiEndpoints:
+  node_server:
+    methods: "GET,POST,PUT"
+    host: localhost
+    paths: "/node_server/*"
+
+serviceEndpoints:
+  node_server_service:
+    url: "http://localhost:8081"
+policies:
+  - proxy
+  - request-transformer
+pipelines:
+  node_server:
+    apiEndpoints:
+      - node_server
+    policies:
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'key'"
+      - proxy:
+          - action:
+              serviceEndpoint: node_server_service
+              prependPath: false
