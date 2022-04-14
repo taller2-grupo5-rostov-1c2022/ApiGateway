@@ -22,7 +22,7 @@ serviceEndpoints:
   node_server_service:
     url: "https://rostov-nodeserver.herokuapp.com"
   songs_service:
-    url: "https://rostov-song-server.herokuapp.com/"
+    url: "https://rostov-song-server.herokuapp.com/api/v1/songs"
 policies:
   - proxy
   - request-transformer
