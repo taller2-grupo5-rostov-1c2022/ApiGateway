@@ -15,6 +15,7 @@ serviceEndpoints:
 policies:
   - proxy
   - request-transformer
+  - rewrite
 pipelines:
   node_server:
     apiEndpoints:
@@ -25,6 +26,12 @@ pipelines:
               headers:
                 add:
                   api_key: "'key'"
+      - rewrite:
+        - condition:
+            name: regexpmatch
+            match: ^/node_server/(.*)$
+          action:
+            rewrite: /$1
       - proxy:
           - action:
               serviceEndpoint: node_server_service
