@@ -71,7 +71,6 @@ jobs:
       - name: Copy Dockerfile
         run: npm run docker:cp-root
       - name: Deploy to heroku
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         env:
           HD_API_KEY: ${{secrets.API_KEY}}
