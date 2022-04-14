@@ -1,17 +1,28 @@
 http:
-  port: 8080
-https:
-  port: 9443
-  hostname: localhost
+  port: 8080 # LOCAL
+# https:
+#   port: 8070
+#   host: "localhost"
+#   tls:
+#     "default":
+#       key: "./certificates/key.key"
+#       cert: "./certificates/cert.crt"
+
 apiEndpoints:
   node_server:
     methods: "GET,POST,PUT"
     host: localhost
     paths: "/node_server/*"
+  songs:
+    methods: "GET,POST,PUT"
+    host: localhost
+    paths: "/songs/*"
 
 serviceEndpoints:
   node_server_service:
-    url: "http://localhost:8081"
+    url: "https://rostov-nodeserver.herokuapp.com"
+  songs_service:
+    url: "https://rostov-song-server.herokuapp.com/"
 policies:
   - proxy
   - request-transformer
@@ -27,12 +38,29 @@ pipelines:
                 add:
                   api_key: "'key'"
       - rewrite:
-        - condition:
-            name: regexpmatch
-            match: ^/node_server/(.*)$
-          action:
-            rewrite: /$1
+          - condition:
+              name: regexpmatch
+              match: ^/node_server/(.*)$
+            action:
+              rewrite: /$1
       - proxy:
           - action:
               serviceEndpoint: node_server_service
-              prependPath: false
+  songs:
+    apiEndpoints:
+      - songs
+    policies:
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'key'"
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/songs/(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: songs_service
