@@ -1,13 +1,14 @@
 http:
   port: ${PORT:-8080}
+  host: ${HOST:-rostov-gateway.herokuapp.com/}
 apiEndpoints:
   node_server:
     methods: "GET,POST,PUT"
-    host: localhost
+    host: ${HOST:-rostov-gateway.herokuapp.com/}
     paths: "/node_server/*"
   songs:
     methods: "GET,POST,PUT"
-    host: localhost
+    host: ${HOST:-rostov-gateway.herokuapp.com/}
     paths: "/songs/*"
 
 serviceEndpoints:

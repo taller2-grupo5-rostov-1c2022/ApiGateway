@@ -2,7 +2,7 @@
   "name": "Gateway",
   "description": "Express Gateway Instance Bootstraped from Command Line",
   "scripts": {
-    "docker:compose": "PORT=8008 docker-compose -f docker/docker-compose.yml up --force-recreate --build",
+    "docker:compose": "PORT=8008 HOST=localhost docker-compose -f docker/docker-compose.yml up --force-recreate --build",
     "docker:cp-root": "cp docker/Dockerfile . && cp docker/.dockerignore ."
   },
   "repository": {},
