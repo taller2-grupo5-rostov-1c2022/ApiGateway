@@ -1,13 +1,5 @@
 http:
-  port: 8080 # LOCAL
-# https:
-#   port: 8070
-#   host: "localhost"
-#   tls:
-#     "default":
-#       key: "./certificates/key.key"
-#       cert: "./certificates/cert.crt"
-
+  port: ${PORT:-8080}
 apiEndpoints:
   node_server:
     methods: "GET,POST,PUT"

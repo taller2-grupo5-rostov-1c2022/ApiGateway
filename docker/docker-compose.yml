@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  nzu-nodeserver:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - PORT=${PORT}

@@ -47,6 +47,18 @@ $ curl http://localhost:8080/songs/
 > [{"name":"song1"},{"name":"song2"},{"name":"another_song"}]
 ```
 
+### Deploy
+
+The pipeline deploys the server automatically on pushing to **master**
+
+You should create the app on heroku first
+
+You'll need to set the following actions secrets:
+
+- `HEROKU_NAME`: App name
+- `HEROKU_EMAIL`: Account email
+- `HEROKU_API_KEY`: Account API key
+
 ### Resources
 
 - [express gateway](https://www.express-gateway.io/)
