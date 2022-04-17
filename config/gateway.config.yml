@@ -3,11 +3,13 @@ http:
   host: ${HOST:-rostov-gateway.herokuapp.com}
 apiEndpoints:
   node_server:
-    methods: "GET,POST,PUT"
+    methods: "*"
+    origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/node_server/*"
   songs:
-    methods: "GET,POST,PUT"
+    methods: "*"
+    origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/songs/*"
 
