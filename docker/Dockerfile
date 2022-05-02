@@ -4,7 +4,6 @@ WORKDIR /server
 
 COPY package*.json ./
 
-RUN echo ${GOOGLE_CREDENTIALS} > /server/google-creds.json
 
 RUN npm i
 
@@ -12,5 +11,7 @@ ENV GOOGLE_CREDENTIALS=${GOOGLE_CREDENTIALS}
 ENV GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
 COPY . .
+
+RUN echo ${GOOGLE_CREDENTIALS} > /server/google-creds.json
 
 CMD ["npm", "start"]
