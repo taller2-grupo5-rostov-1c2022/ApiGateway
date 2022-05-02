@@ -2,7 +2,11 @@ const { initializeApp, applicationDefault } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
 require("dotenv").config();
 
-initializeApp({ credential: applicationDefault() });
+try {
+  initializeApp({ credential: applicationDefault() });
+} catch (error) {
+  console.log(error);
+}
 
 const getUid = async (token) => {
   const user = await getAuth().verifyIdToken(token);

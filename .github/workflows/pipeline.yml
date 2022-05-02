@@ -15,50 +15,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #  Install:
-  #    runs-on: ubuntu-18.04
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #      - name: Install Node
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          cache: npm
-  #          node-version: "17"
-  #      - name: Install Dependencies
-  #        run: npm ci
-  #
-  #  Lint:
-  #    needs: Install
-  #    runs-on: ubuntu-18.04
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #      - name: Install Node
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          cache: npm
-  #          node-version: "17"
-  #      - name: Install Dependencies
-  #        run: npm ci
-  #      - name: Run Linter
-  #        run: npm run lint
-  #
-  #  Test:
-  #    runs-on: ubuntu-18.04
-  #    needs: Install
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #      - name: Install Node
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          cache: npm
-  #          node-version: "17"
-  #      - name: Install Dependencies
-  #        run: npm ci
-  #      - name: Run Tests
-  #        run: npm run test:coverage
-  #      - name: Upload test:coverage
-  #        run: ./node_modules/.bin/codecov --token="${{secrets.CODECOV_TOKEN}}"
-
   Deploy:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     # needs: [Lint, Test]
