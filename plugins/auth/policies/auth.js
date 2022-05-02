@@ -1,6 +1,5 @@
 const { initializeApp, applicationDefault } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
-require("dotenv").config();
 
 try {
   initializeApp({ credential: applicationDefault() });
