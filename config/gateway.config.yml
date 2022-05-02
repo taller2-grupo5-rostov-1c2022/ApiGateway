@@ -22,6 +22,7 @@ policies:
   - proxy
   - request-transformer
   - rewrite
+  - auth
 pipelines:
   node_server:
     apiEndpoints:
@@ -45,6 +46,7 @@ pipelines:
     apiEndpoints:
       - songs
     policies:
+      - auth: null
       - request-transformer:
           - action:
               headers:

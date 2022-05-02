@@ -1,6 +1,6 @@
 version: "3.5"
 services:
-  nzu-nodeserver:
+  gateway:
     build:
       context: ../
       dockerfile: docker/Dockerfile
@@ -9,3 +9,5 @@ services:
     environment:
       - PORT=${PORT}
       - HOST=${HOST}
+      - GOOGLE_APPLICATION_CREDENTIALS=google-creds.json
+      - GOOGLE_CREDENTIALS=${GOOGLE_CREDENTIALS}

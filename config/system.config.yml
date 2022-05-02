@@ -6,7 +6,9 @@ db:
 
 plugins:
   express-gateway-plugin-rewrite:
-    package: './rewrite.js'
+    package: "./plugins/rewrite/manifest.js"
+  auth:
+    package: "./plugins/auth/manifest.js"
 
 crypto:
   cipherKey: sensitiveKey

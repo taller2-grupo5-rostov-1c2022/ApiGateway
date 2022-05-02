@@ -2,7 +2,7 @@
   "name": "Gateway",
   "description": "Express Gateway Instance Bootstraped from Command Line",
   "scripts": {
-    "docker:compose": "PORT=8008 HOST=localhost docker-compose -f docker/docker-compose.yml up --force-recreate --build",
+    "docker:compose": "PORT=8008 HOST=localhost docker-compose --env-file .env -f docker/docker-compose.yml up --force-recreate --build",
     "docker:cp-root": "cp docker/Dockerfile . && cp docker/.dockerignore ."
   },
   "repository": {},
@@ -10,8 +10,10 @@
   "version": "0.1.0",
   "main": "server.js",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-gateway": "^1.16.11",
+    "firebase-admin": "^10.1.0",
     "path-to-regexp": "^6.2.0"
   }
 }
