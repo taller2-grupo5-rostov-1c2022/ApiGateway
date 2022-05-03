@@ -20,6 +20,12 @@ module.exports = {
     return async (req, res, next) => {
       try {
         const auth = req?.headers?.authorization;
+
+        if (!auth) {
+          return res.status(400).send({
+            error: "Invalid Authorization",
+          });
+        }
         const _auth = auth.trim().split(/ (.*)/s);
 
         const authType = _auth[0];

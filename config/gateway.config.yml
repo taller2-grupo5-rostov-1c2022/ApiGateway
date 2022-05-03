@@ -17,35 +17,25 @@ serviceEndpoints:
   node_server_service:
     url: "https://rostov-nodeserver.herokuapp.com"
   songs_service:
-    url: "https://rostov-song-server.herokuapp.com/api/v2/songs"
+    url: "http://rostov-song-server.herokuapp.com/api/v2/songs"
 policies:
+  - cors
   - proxy
   - request-transformer
   - rewrite
   - auth
 pipelines:
-  node_server:
-    apiEndpoints:
-      - node_server
-    policies:
-      - request-transformer:
-          - action:
-              headers:
-                add:
-                  api_key: "'key'"
-      - rewrite:
-          - condition:
-              name: regexpmatch
-              match: ^/node_server/(.*)$
-            action:
-              rewrite: /$1
-      - proxy:
-          - action:
-              serviceEndpoint: node_server_service
   songs:
     apiEndpoints:
       - songs
     policies:
+      - cors:
+          - action:
+              methods: "*"
+              origin: "*"
+              credentials: true
+              allowedHeaders: "*"
+              preflightContinue: false
       - auth: null
       - request-transformer:
           - action:
