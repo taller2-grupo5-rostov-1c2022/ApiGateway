@@ -41,7 +41,7 @@ pipelines:
           - action:
               headers:
                 add:
-                  api_key: ${SONGS_API_KEY:-key}
+                  api_key: "'${SONGS_API_KEY}'"
       - rewrite:
           - condition:
               name: regexpmatch
