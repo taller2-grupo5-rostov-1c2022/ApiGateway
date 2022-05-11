@@ -17,7 +17,7 @@ serviceEndpoints:
   node_server_service:
     url: "https://rostov-nodeserver.herokuapp.com"
   songs_service:
-    url: "http://rostov-song-server.herokuapp.com/api/v3/songs"
+    url: "http://rostov-song-server.herokuapp.com/api/v3"
 policies:
   - cors
   - proxy
@@ -41,7 +41,7 @@ pipelines:
           - action:
               headers:
                 add:
-                  api_key: "'key2'"
+                  api_key: ${SONGS_API_KEY:-key}
       - rewrite:
           - condition:
               name: regexpmatch
