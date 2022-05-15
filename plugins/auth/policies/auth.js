@@ -7,11 +7,6 @@ try {
   console.log(error);
 }
 
-const getUid = async (token) => {
-  const user = await getAuth().verifyIdToken(token);
-  return user?.uid;
-};
-
 module.exports = {
   name: "auth",
 
@@ -37,8 +32,9 @@ module.exports = {
           });
         }
 
-        const uid = await getUid(token);
+        const { uid, role } = await getAuth().verifyIdToken(token);
         req.headers.uid = uid;
+        req.headers.role = role;
 
         next();
       } catch (error) {
