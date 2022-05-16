@@ -34,7 +34,7 @@ module.exports = {
 
         const { uid, role } = await getAuth().verifyIdToken(token);
         req.headers.uid = uid;
-        req.headers.role = role;
+        req.headers.role = role ?? "listener";
 
         next();
       } catch (error) {
