@@ -7,6 +7,9 @@ Done using express-gateway.
 
 - `{gateway}/nodeserver`: Mock node server
 - `{gateway}/songs`: Songs API
+- `{gateway}/messages`: Messages API
+- `{gateway}/notifications`: Notificatinos API
+- `{gateway}/devsongs`: Songs development environment API
 
 ## Development
 
