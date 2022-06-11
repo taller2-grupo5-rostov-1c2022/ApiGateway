@@ -33,6 +33,7 @@ jobs:
           HD_GOOGLE_APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           HD_GOOGLE_CREDENTIALS: ${{secrets.GOOGLE_CREDENTIALS}}
           HD_SONGS_API_KEY: ${{secrets.SONGS_API_KEY}}
+          HD_NOTIFICATIONS_API_KEY: ${{secrets.NOTIFICATIONS_API_KEY}}
         with:
           usedocker: true
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}

@@ -114,7 +114,7 @@ pipelines:
           - action:
               headers:
                 add:
-                  api_key: "'key'"
+                  api_key: "'${NOTIFICATIONS_API_KEY}'"
       - rewrite:
           - condition:
               name: regexpmatch
