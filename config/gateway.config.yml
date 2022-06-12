@@ -1,44 +1,68 @@
 http:
   port: ${PORT:-8080}
   host: ${HOST:-rostov-gateway.herokuapp.com}
+
 apiEndpoints:
+
   songs:
     methods: "*"
     origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/songs/*"
-  messages:
-    methods: "*"
-    origin: "*"
-    host: ${HOST:-rostov-gateway.herokuapp.com}
-    paths: "/messages/*"
-  notifications:
-    methods: "*"
-    origin: "*"
-    host: ${HOST:-rostov-gateway.herokuapp.com}
-    paths: "/notifications/*"
+
   devsongs:
     methods: "*"
     origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/devsongs/*"
 
+  messages:
+    methods: "*"
+    origin: "*"
+    host: ${HOST:-rostov-gateway.herokuapp.com}
+    paths: "/messages/*"
+
+  notifications:
+    methods: "*"
+    origin: "*"
+    host: ${HOST:-rostov-gateway.herokuapp.com}
+    paths: "/notifications/*"
+
+  balance:
+    methods: "*"
+    origin: "*"
+    host: ${HOST:-rostov-gateway.herokuapp.com}
+    paths: "/balance/*"
+
+
 serviceEndpoints:
+
   songs_service:
     url: "http://rostov-song-server.herokuapp.com/api/v3"
-  messages_service:
-    url: "http://rostov-messages-server.herokuapp.com/api/v1"
-  notifications_service:
-    url: "https://rostov-notifs-server.herokuapp.com/api/v1"
+
   devsongs_service:
     url: "https://rostov-songs-dev.herokuapp.com/api/v3"
+
+  messages_service:
+    url: "http://rostov-messages-server.herokuapp.com/api/v1"
+
+  notifications_service:
+    url: "https://rostov-notifs-server.herokuapp.com/api/v1"
+
+  balance_service:
+    url: "https://rostov-payments-server.herokuapp.com/api/v1/balances"
+
+
 policies:
+
   - cors
   - proxy
   - request-transformer
   - rewrite
   - auth
+
 pipelines:
+
   songs:
     apiEndpoints:
       - songs
@@ -65,58 +89,7 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: songs_service
-  messages:
-    apiEndpoints:
-      - messages
-    policies:
-      - cors:
-          - action:
-              methods: "*"
-              origin: "*"
-              credentials: true
-              allowedHeaders: "*"
-              preflightContinue: false
-      - auth: null
-      - request-transformer:
-          - action:
-              headers:
-                add:
-                  api_key: "'key'"
-      - rewrite:
-          - condition:
-              name: regexpmatch
-              match: ^/messages/(.*)$
-            action:
-              rewrite: /$1
-      - proxy:
-          - action:
-              serviceEndpoint: messages_service
-  notifications:
-    apiEndpoints:
-      - notifications
-    policies:
-      - cors:
-          - action:
-              methods: "*"
-              origin: "*"
-              credentials: true
-              allowedHeaders: "*"
-              preflightContinue: false
-      - auth: null
-      - request-transformer:
-          - action:
-              headers:
-                add:
-                  api_key: "'${NOTIFICATIONS_API_KEY}'"
-      - rewrite:
-          - condition:
-              name: regexpmatch
-              match: ^/notifications/(.*)$
-            action:
-              rewrite: /$1
-      - proxy:
-          - action:
-              serviceEndpoint: notifications_service
+
   devsongs:
     apiEndpoints:
       - devsongs
@@ -143,3 +116,84 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: devsongs_service
+
+  messages:
+    apiEndpoints:
+      - messages
+    policies:
+      - cors:
+          - action:
+              methods: "*"
+              origin: "*"
+              credentials: true
+              allowedHeaders: "*"
+              preflightContinue: false
+      - auth: null
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'key'"
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/messages/(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: messages_service
+
+  notifications:
+    apiEndpoints:
+      - notifications
+    policies:
+      - cors:
+          - action:
+              methods: "*"
+              origin: "*"
+              credentials: true
+              allowedHeaders: "*"
+              preflightContinue: false
+      - auth: null
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'${NOTIFICATIONS_API_KEY}'"
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/notifications/(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: notifications_service
+
+  balance:
+    apiEndpoints:
+      - balance
+    policies:
+      - cors:
+          - action:
+              methods: "*"
+              origin: "*"
+              credentials: true
+              allowedHeaders: "*"
+              preflightContinue: false
+      - auth: null
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'key'"
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/balance/(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: balance_service
