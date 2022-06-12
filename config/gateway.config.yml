@@ -35,7 +35,7 @@ serviceEndpoints:
     url: "http://rostov-song-server.herokuapp.com/api/v3"
   messages_service:
     url: "http://rostov-messages-server.herokuapp.com/api/v1"
-  songs_dev:
+  songs_dev_service:
     url: "https://rostov-songs-dev.herokuapp.com/api/v3"
   notifications_service:
     url: "https://rostov-notifs-server.herokuapp.com/api/v1"
@@ -149,4 +149,4 @@ pipelines:
               rewrite: /$1
       - proxy:
           - action:
-              serviceEndpoint: songs_dev
+              serviceEndpoint: songs_dev_service
