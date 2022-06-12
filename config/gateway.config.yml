@@ -7,11 +7,6 @@ apiEndpoints:
     origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/songs/*"
-  devsongs:
-    methods: "*"
-    origin: "*"
-    host: ${HOST:-rostov-gateway.herokuapp.com}
-    paths: "/devsongs/*"
   messages:
     methods: "*"
     origin: "*"
@@ -22,16 +17,21 @@ apiEndpoints:
     origin: "*"
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/notifications/*"
+  devsongs:
+    methods: "*"
+    origin: "*"
+    host: ${HOST:-rostov-gateway.herokuapp.com}
+    paths: "/devsongs/*"
 
 serviceEndpoints:
   songs_service:
     url: "http://rostov-song-server.herokuapp.com/api/v3"
   messages_service:
     url: "http://rostov-messages-server.herokuapp.com/api/v1"
-  songs_dev_service:
-    url: "https://rostov-songs-dev.herokuapp.com/api/v3"
   notifications_service:
     url: "https://rostov-notifs-server.herokuapp.com/api/v1"
+  devsongs_service:
+    url: "https://rostov-songs-dev.herokuapp.com/api/v3"
 policies:
   - cors
   - proxy
@@ -142,4 +142,4 @@ pipelines:
               rewrite: /$1
       - proxy:
           - action:
-              serviceEndpoint: songs_dev_service
+              serviceEndpoint: devsongs_service
