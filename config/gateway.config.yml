@@ -2,11 +2,6 @@ http:
   port: ${PORT:-8080}
   host: ${HOST:-rostov-gateway.herokuapp.com}
 apiEndpoints:
-  node_server:
-    methods: "*"
-    origin: "*"
-    host: ${HOST:-rostov-gateway.herokuapp.com}
-    paths: "/node_server/*"
   songs:
     methods: "*"
     origin: "*"
@@ -29,8 +24,6 @@ apiEndpoints:
     paths: "/notifications/*"
 
 serviceEndpoints:
-  node_server_service:
-    url: "https://rostov-nodeserver.herokuapp.com"
   songs_service:
     url: "http://rostov-song-server.herokuapp.com/api/v3"
   messages_service:
