@@ -25,11 +25,6 @@ const services = [
     url: "https://rostov-payments-server.herokuapp.com/api/v1/",
     apiKey: "key",
   },
-  {
-    name: "balance",
-    url: "https://rostov-payments-server.herokuapp.com/api/v1/balances",
-    apiKey: "key",
-  },
 ];
 
 let output = `http:

@@ -34,12 +34,6 @@ apiEndpoints:
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/payments/*"
 
-  balance:
-    methods: "*"
-    origin: "*"
-    host: ${HOST:-rostov-gateway.herokuapp.com}
-    paths: "/balance/*"
-
 
 serviceEndpoints:
 
@@ -57,9 +51,6 @@ serviceEndpoints:
 
   payments_service:
     url: "https://rostov-payments-server.herokuapp.com/api/v1/"
-
-  balance_service:
-    url: "https://rostov-payments-server.herokuapp.com/api/v1/balances"
 
 
 policies:
@@ -206,30 +197,3 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: payments_service
-
-  balance:
-    apiEndpoints:
-      - balance
-    policies:
-      - cors:
-          - action:
-              methods: "*"
-              origin: "*"
-              credentials: true
-              allowedHeaders: "*"
-              preflightContinue: false
-      - auth: null
-      - request-transformer:
-          - action:
-              headers:
-                add:
-                  api_key: "'key'"
-      - rewrite:
-          - condition:
-              name: regexpmatch
-              match: ^/balance/(.*)$
-            action:
-              rewrite: /$1
-      - proxy:
-          - action:
-              serviceEndpoint: balance_service
