@@ -9,7 +9,8 @@ Done using express-gateway.
 - `{gateway}/devsongs`: Songs development environment API
 - `{gateway}/messages`: Messages API
 - `{gateway}/notifications`: Notificatinos API
-- `{gateway}/balance`: User balance Endpoint
+- `{gateway}/payments`: Payments API
+- `{gateway}/balance`: User balance Endpoint (migrate to payments and remove)
 
 ### Adding Routes
 

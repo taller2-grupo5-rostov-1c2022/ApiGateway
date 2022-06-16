@@ -28,6 +28,12 @@ apiEndpoints:
     host: ${HOST:-rostov-gateway.herokuapp.com}
     paths: "/notifications/*"
 
+  payments:
+    methods: "*"
+    origin: "*"
+    host: ${HOST:-rostov-gateway.herokuapp.com}
+    paths: "/payments/*"
+
   balance:
     methods: "*"
     origin: "*"
@@ -48,6 +54,9 @@ serviceEndpoints:
 
   notifications_service:
     url: "https://rostov-notifs-server.herokuapp.com/api/v1"
+
+  payments_service:
+    url: "https://rostov-payments-server.herokuapp.com/api/v1/"
 
   balance_service:
     url: "https://rostov-payments-server.herokuapp.com/api/v1/balances"
@@ -170,6 +179,33 @@ pipelines:
       - proxy:
           - action:
               serviceEndpoint: notifications_service
+
+  payments:
+    apiEndpoints:
+      - payments
+    policies:
+      - cors:
+          - action:
+              methods: "*"
+              origin: "*"
+              credentials: true
+              allowedHeaders: "*"
+              preflightContinue: false
+      - auth: null
+      - request-transformer:
+          - action:
+              headers:
+                add:
+                  api_key: "'key'"
+      - rewrite:
+          - condition:
+              name: regexpmatch
+              match: ^/payments/(.*)$
+            action:
+              rewrite: /$1
+      - proxy:
+          - action:
+              serviceEndpoint: payments_service
 
   balance:
     apiEndpoints:

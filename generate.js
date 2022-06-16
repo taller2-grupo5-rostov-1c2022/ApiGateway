@@ -21,6 +21,11 @@ const services = [
     apiKey: "${NOTIFICATIONS_API_KEY}",
   },
   {
+    name: "payments",
+    url: "https://rostov-payments-server.herokuapp.com/api/v1/",
+    apiKey: "key",
+  },
+  {
     name: "balance",
     url: "https://rostov-payments-server.herokuapp.com/api/v1/balances",
     apiKey: "key",

@@ -3,7 +3,8 @@
   "description": "Express Gateway Instance Bootstraped from Command Line",
   "scripts": {
     "docker:compose": "PORT=8008 HOST=localhost docker-compose --env-file .env -f docker/docker-compose.yml up --force-recreate --build",
-    "docker:cp-root": "cp docker/Dockerfile . && cp docker/.dockerignore ."
+    "docker:cp-root": "cp docker/Dockerfile . && cp docker/.dockerignore .",
+    "start": "node generate.js"
   },
   "repository": {},
   "license": "UNLICENSED",
